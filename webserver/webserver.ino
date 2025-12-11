@@ -9,7 +9,10 @@ const char* password = "12345678";
 // ======================================
 WiFiServer server(80);
 BluetoothSerial SerialBT;
+
 const int ledPin = 2; 
+const char* on = "LED turned ON";
+const char* off = "LED turned OFF";
 
 void setup() {
   Serial.begin(115200);
@@ -37,14 +40,6 @@ void setup() {
 
 void loop() {
 
-  if (Serial.available()) {
-    SerialBT.write(Serial.read()); 
-  }
-
-  if (SerialBT.available()) {
-    Serial.write(SerialBT.read()); 
-  }
-  
   WiFiClient client = server.available();
   
   if (!client) return;
@@ -59,12 +54,14 @@ void loop() {
   // Handle ON/OFF requests
   if (req.indexOf("/ON") != -1) {
     digitalWrite(ledPin, HIGH);
-    Serial.println("LED turned on.");
+    Serial.println(on);
+    SerialBT.println(on);
   }
   
   if (req.indexOf("/OFF") != -1) {
     digitalWrite(ledPin, LOW);
-    Serial.println("LED turned off.");
+    Serial.println(off);
+    SerialBT.println(off);
   }
   
   // Send HTML page

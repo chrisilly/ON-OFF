@@ -24,6 +24,16 @@ Hmm... The upper-case 'A' got scrambled still. I wonder what causes that...
 
 ![Screenshot of a website titled "ESP32 LED Control" containing an ON button and an OFF button.](image.png)
 
+> [!TIP] Turns out that refreshing triggers the last button-press again, haha.
+
 ## Combining Bluetooth and the webserver
 
 At first, my sketch was too big for the `DOIT ESP32 DEVKIT V1` board. With Adam's wisdom, I switched the board to `ESP32 Dev Module` after which I could select `Tools` > `Partition Scheme` > `Huge APP (3MB No OTA/1MB SPIFFS)`. Then, after unplugging and replugging the USB cable, I was able to upload the sketch.
+
+This problem aside, adding bluetooth connectivity to the code was trivial.
+
+## Sending the LED ON/OFF status via Bluetooth
+
+I wanted to send the LED ON/OFF status via Bluetooth to my phone, but I'm not understanding how the `BluetoothSerial` `write()` function works (it doesn't accept strings or chars). This makes me even more confused about how it turns `Serial.read()` (which returns an `int`??) into the text typed into the Serial Monitor. What??
+
+Turns out there was a `println()` function that I missed 🫠
