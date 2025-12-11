@@ -13,6 +13,9 @@ void setup() {
   
   // Start WiFi in Access Point mode
   WiFi.softAP(ssid, password);
+
+  delay(1000); // Maybe adding a delay will make the following prints acutally show up?
+
   Serial.println("WiFi AP started!");
   Serial.print("Connect to: ");
   Serial.println(ssid);
@@ -37,10 +40,12 @@ void loop() {
   // Handle ON/OFF requests
   if (req.indexOf("/ON") != -1) {
     digitalWrite(ledPin, HIGH);
+    Serial.println("LED turned on.");
   }
   
   if (req.indexOf("/OFF") != -1) {
     digitalWrite(ledPin, LOW);
+    Serial.println("LED turned off.");
   }
   
   // Send HTML page
