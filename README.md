@@ -4,6 +4,8 @@ Internet of Things and People
 
 Lab 5
 
+# Exercise 1
+
 ## Communicating over Bluetooth
 
 I changed the line `Serial.begin(115200);` in the provided code to `Serial.begin(9600);` and set the Serial Monitor baud-rate to match. The following is the Serial Monitor output of the final attempt.
@@ -37,3 +39,7 @@ This problem aside, adding bluetooth connectivity to the code was trivial.
 I wanted to send the LED ON/OFF status via Bluetooth to my phone, but I'm not understanding how the `BluetoothSerial` `write()` function works (it doesn't accept strings or chars). This makes me even more confused about how it turns `Serial.read()` (which returns an `int`??) into the text typed into the Serial Monitor. What??
 
 Turns out there was a `println()` function that I missed 🫠
+
+## Actually putting the LED on the circuit.
+
+I spent like two hours not realising that the resistor I was using was, like, way too strong or something and permanently kept the LED off. My spirits have been tackled and they are not responsive.
