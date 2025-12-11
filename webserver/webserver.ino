@@ -1,9 +1,14 @@
 #include <WiFi.h>
+#include "BluetoothSerial.h"
+#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it 
+#endif
 // ========== WiFi Credentials ==========
 const char* ssid = "ESP32_WebServer_Chris";
 const char* password = "12345678";
 // ======================================
 WiFiServer server(80);
+BluetoothSerial SerialBT;
 const int ledPin = 2; 
 
 void setup() {
@@ -21,10 +26,24 @@ void setup() {
   Serial.println(ssid);
   Serial.print("Open browser and go to: ");
   Serial.println(WiFi.softAPIP());
+
+  // Start Bluetooth
+  SerialBT.begin("ESP32_Chris"); // Bluetooth device name
+  delay(200);
+  Serial.println("Bluetooth started. You may now pair with another device.");
+
   server.begin();
 }
 
 void loop() {
+
+  if (Serial.available()) {
+    SerialBT.write(Serial.read()); 
+  }
+
+  if (SerialBT.available()) {
+    Serial.write(SerialBT.read()); 
+  }
   
   WiFiClient client = server.available();
   

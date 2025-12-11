@@ -4,9 +4,7 @@ Internet of Things and People
 
 Lab 5
 
-# Task 1
-
-## Result 2
+## Communicating over Bluetooth
 
 I changed the line `Serial.begin(115200);` in the provided code to `Serial.begin(9600);` and set the Serial Monitor baud-rate to match. The following is the Serial Monitor output of the final attempt.
 
@@ -18,10 +16,14 @@ Wait, no I can send just fine too!
 Hmm... The upper-case 'A' got scrambled still. I wonder what causes that...
 ```
 
-# Task 2
+## Running the webserver
 
 1. Ran the provided webserver code
 2. Connected to the wi-fi emitted by the ESP32
 3. Connected to the webserver (`192.168.4.1`)
 
 ![Screenshot of a website titled "ESP32 LED Control" containing an ON button and an OFF button.](image.png)
+
+## Combining Bluetooth and the webserver
+
+At first, my sketch was too big for the `DOIT ESP32 DEVKIT V1` board. With Adam's wisdom, I switched the board to `ESP32 Dev Module` after which I could select `Tools` > `Partition Scheme` > `Huge APP (3MB No OTA/1MB SPIFFS)`. Then, after unplugging and replugging the USB cable, I was able to upload the sketch.
